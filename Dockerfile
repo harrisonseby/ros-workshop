@@ -18,6 +18,14 @@ RUN apt-get update && apt-get install -y \
     nano \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Navigation2 and related packages
+RUN apt-get update && apt-get install -y \
+    ros-${ROS_DISTRO}-navigation2 \
+    ros-${ROS_DISTRO}-nav2-bringup \
+    ros-$ROS_DISTRO-rviz2 \
+    ros-$ROS_DISTRO-ros-gz \
+    ros-$ROS_DISTRO-ros-gz-bridge \
+    && rm -rf /var/lib/apt/lists/*
 # Initialize rosdep
 RUN rosdep update
 

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   ros-workshop:
     image: ros-workshop
@@ -9,7 +7,7 @@ services:
     tty: true
     command: tail -f /dev/null
     volumes:
-      - ./:/ros_ws/src/workspace:rw
+      - ./src:/ros_ws/src:rw
     deploy:
       resources:
         reservations:

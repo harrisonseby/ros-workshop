@@ -1,0 +1,17 @@
+# Development notes
+## Docker file
+---
+## diff_bot_sim
+### Initial setup
+1. First setup was to have a simple urdf, bring it up in rviz. Two trolley wheels and one castor wheel.
+2. Need robot_state_publisher to publish the /robot_description. Rviz wont visualize movable joints with just robot state publisher. We need something that publishes the joint states as well.
+3. This is acheived by starting the joint_state_publisher node. You do need the joint_state_publisher_gui to control the joints and see them reflecting in rviz.
+4. Finally I added a rviz node to have it start from a certain saved panel state.
+
+### Inertial value addition
+
+### Sensor addition without gazebo
+
+## Bring up in gazebo
+
+## Navigation setup

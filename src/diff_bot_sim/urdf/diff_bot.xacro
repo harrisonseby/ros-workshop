@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot name="diff_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <link name="world"/>
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.9 0.64 0.19"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <link name="left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.13" length="0.05"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <link name="right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.13" length="0.05"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <link name="caster_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="world_to_base_link" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0.25 0.35 -0.12" rpy="1.57 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0.25 -0.35 -0.12" rpy="1.57 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <joint name="caster_wheel_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_wheel"/>
+    <origin xyz="-0.35 0 -0.12" rpy="0 0 0"/>
+  </joint>
+</robot>

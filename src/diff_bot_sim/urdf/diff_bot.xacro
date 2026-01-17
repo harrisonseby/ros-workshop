@@ -13,11 +13,17 @@
     <xacro:property name="traction_wheel_width" value="0.05"/>
     <xacro:property name="traction_track_width" value="0.6"/>
 
-    <!-- ............................... LOAD MACROS ................................. -->
+    <xacro:arg name="sim_ign" default="true" />
 
-    <xacro:include filename="$(find diff_bot_sim)/urdf/macros.xacro"/>
 
-  <link name="world"/>
+  <xacro:if value="$(arg sim_ign)">
+      <xacro:include filename="$(find diff_bot_sim)/urdf/ign.xacro"/>
+  </xacro:if>
+
+
+  <xacro:include filename="$(find diff_bot_sim)/urdf/macros.xacro"/>
+
+  <link name="base_link"/>
   <link name="chassis_link">
     <visual>
       <geometry>
@@ -97,8 +103,8 @@
         <xacro:sphere_inertia m="0.5" r="0.1"/>
     </inertial>
   </link>
-  <joint name="world_to_chassis_link" type="fixed">
-    <parent link="world"/>
+  <joint name="chassis_joint" type="fixed">
+    <parent link="base_link"/>
     <child link="chassis_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>

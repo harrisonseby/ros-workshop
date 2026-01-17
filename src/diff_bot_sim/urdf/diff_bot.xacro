@@ -1,35 +1,82 @@
 <?xml version="1.0"?>
 <robot name="diff_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!--................................ XACRO CONSTANTS .............................. -->
+
+    <xacro:property name="chassis_mass" value="70"/>
+    <xacro:property name="chassis_length" value="0.9"/>
+    <xacro:property name="chassis_width" value="0.64"/>
+    <xacro:property name="chassis_height" value="0.19"/>
+
+    <xacro:property name="traction_wheel_mass" value="1"/>
+    <xacro:property name="traction_wheel_radius" value="0.1"/>
+    <xacro:property name="traction_wheel_width" value="0.05"/>
+    <xacro:property name="traction_track_width" value="0.6"/>
+
+    <!-- ............................... LOAD MACROS ................................. -->
+
+    <xacro:include filename="$(find diff_bot_sim)/urdf/macros.xacro"/>
+
   <link name="world"/>
-  <link name="base_link">
+  <link name="chassis_link">
     <visual>
       <geometry>
-        <box size="0.9 0.64 0.19"/>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
       <material name="grey">
         <color rgba="0.5 0.5 0.5 1.0"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="${chassis_mass}"/>
+      <xacro:box_inertia m="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z = "${chassis_height}"/>
+    </inertial>
   </link>
+
   <link name="left_wheel">
     <visual>
       <geometry>
-        <cylinder radius="0.13" length="0.05"/>
+        <cylinder radius="${traction_wheel_radius}" length="${traction_wheel_width}"/>
       </geometry>
       <material name="black">
         <color rgba="0.0 0.0 0.0 1.0"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${traction_wheel_radius}" length="${traction_wheel_width}"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 ${pi/2} ${pi/2}" />
+        <mass value="${traction_wheel_mass}"/>
+        <xacro:cylinder_inertia m="${traction_wheel_mass}" r="${traction_wheel_radius}" h="${traction_wheel_width}"/>
+    </inertial>
   </link>
   <link name="right_wheel">
     <visual>
       <geometry>
-        <cylinder radius="0.13" length="0.05"/>
+        <cylinder radius="${traction_wheel_radius}" length="${traction_wheel_width}"/>
       </geometry>
       <material name="black">
         <color rgba="0.0 0.0 0.0 1.0"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${traction_wheel_radius}" length="${traction_wheel_width}"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 ${pi/2} ${pi/2}" />
+        <mass value="${traction_wheel_mass}"/>
+        <xacro:cylinder_inertia m="${traction_wheel_mass}" r="${traction_wheel_radius}" h="${traction_wheel_width}"/>
+    </inertial>
   </link>
   <link name="caster_wheel">
     <visual>
@@ -40,26 +87,35 @@
         <color rgba="0.0 0.0 0.0 1.0"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.5"/>
+        <xacro:sphere_inertia m="0.5" r="0.1"/>
+    </inertial>
   </link>
-  <joint name="world_to_base_link" type="fixed">
+  <joint name="world_to_chassis_link" type="fixed">
     <parent link="world"/>
-    <child link="base_link"/>
+    <child link="chassis_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
   <joint name="left_wheel_joint" type="continuous">
-    <parent link="base_link"/>
+    <parent link="chassis_link"/>
     <child link="left_wheel"/>
     <origin xyz="0.25 0.35 -0.12" rpy="1.57 0 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <joint name="right_wheel_joint" type="continuous">
-    <parent link="base_link"/>
+    <parent link="chassis_link"/>
     <child link="right_wheel"/>
     <origin xyz="0.25 -0.35 -0.12" rpy="1.57 0 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <joint name="caster_wheel_joint" type="fixed">
-    <parent link="base_link"/>
+    <parent link="chassis_link"/>
     <child link="caster_wheel"/>
     <origin xyz="-0.35 0 -0.12" rpy="0 0 0"/>
   </joint>

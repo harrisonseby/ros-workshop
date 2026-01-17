@@ -4,9 +4,9 @@ from os.path import join
 from xacro import parse, process_doc
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration, Command
-
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.substitutions import LaunchConfiguration, Command, PythonExpression
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
 from ament_index_python.packages import get_package_share_directory
@@ -46,8 +46,35 @@ def generate_launch_description():
         arguments=["-d", join(diff_bot_path, "rviz", "default.rviz")]
     )
 
+    # Define Gazebo simulation launch
+    gz_sim_share = get_package_share_directory("ros_gz_sim")
+    world_file = join(diff_bot_path, "worlds", "empty.sdf")
+    gz_sim = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(join(gz_sim_share, "launch", "gz_sim.launch.py")),
+        launch_arguments={
+            "gz_args" : PythonExpression(["'", world_file, " -r'"])
+
+        }.items()
+    )
+
+    gz_spawn_entity = Node(
+        package="ros_gz_sim",
+        executable="create",
+        arguments=[
+            "-topic", "/robot_description",
+            "-name", "diff_bot",
+            "-allow_renaming", "true",
+            "-z", "0.28",
+            "-x", "0.0",
+            "-y", "0.0",
+            "-Y", "0.0"
+        ]
+    )
+
     return LaunchDescription([
         robot_state_publisher,
         joint_state_publisher,
         rviz,
+        gz_sim,
+        gz_spawn_entity
     ])

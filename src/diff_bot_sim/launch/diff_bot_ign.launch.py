@@ -73,12 +73,14 @@ def generate_launch_description():
         executable="parameter_bridge",
         arguments=[
             "/world/empty/model/diff_bot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model",
-            "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist"
+            "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
+            "/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan"
 
         ],
         remappings=[
             ('/world/empty/model/diff_bot/joint_state', 'diff_bot/joint_states'),
             ('/cmd_vel', 'diff_bot/cmd_vel'),
+            ('/scan', 'diff_bot/scan'),
         ]
     )
 

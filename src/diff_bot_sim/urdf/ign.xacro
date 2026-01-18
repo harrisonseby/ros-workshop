@@ -24,5 +24,37 @@
             <topic>cmd_vel</topic>
         </plugin>
     </gazebo>
+    
+    <gazebo reference="two_d_lidar">
+        <sensor name='gpu_lidar' type='gpu_lidar'>
+            <topic>scan</topic>
+            <update_rate>${two_d_lidar_update_rate}</update_rate>
+            <ignition_frame_id>two_d_lidar</ignition_frame_id>
+            <lidar>
+                <scan>
+                    <horizontal>
+                        <samples>${two_d_lidar_sample_size}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>${radians(two_d_lidar_min_angle)}</min_angle>
+                        <max_angle>${radians(two_d_lidar_max_angle)}</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>${two_d_lidar_min_range}</min>
+                    <max>${two_d_lidar_max_range}</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.001</stddev>
+                </noise>
+            </lidar>
+            <alwaysOn>1</alwaysOn>
+            <visualize>true</visualize>
+        </sensor>
+    </gazebo>
+
+
 
 </robot>

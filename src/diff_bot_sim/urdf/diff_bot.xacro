@@ -13,6 +13,14 @@
     <xacro:property name="traction_wheel_width" value="0.05"/>
     <xacro:property name="traction_track_width" value="0.6"/>
 
+
+    <xacro:property name="two_d_lidar_update_rate" value="30"/>
+    <xacro:property name="two_d_lidar_sample_size" value="361"/>
+    <xacro:property name="two_d_lidar_min_angle" value="0"/>
+    <xacro:property name="two_d_lidar_max_angle" value="360"/>
+    <xacro:property name="two_d_lidar_min_range" value="0.55"/>
+    <xacro:property name="two_d_lidar_max_range" value="16"/>
+
     <xacro:arg name="sim_ign" default="true" />
 
 
@@ -134,23 +142,50 @@
   <joint name="left_wheel_joint" type="continuous">
     <parent link="chassis_link"/>
     <child link="left_wheel"/>
-    <origin xyz="0.0 0.35 -0.12" rpy="1.57 0 0"/>
+    <origin xyz="0.0 0.35 -0.12" rpy="-1.57 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
   <joint name="right_wheel_joint" type="continuous">
     <parent link="chassis_link"/>
     <child link="right_wheel"/>
-    <origin xyz="0.0 -0.35 -0.12" rpy="1.57 0 0"/>
+    <origin xyz="0.0 -0.35 -0.12" rpy="-1.57 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
   <joint name="caster_wheel_front_joint" type="fixed">
     <parent link="chassis_link"/>
     <child link="caster_wheel_front"/>
-    <origin xyz="-0.35 0 -0.12" rpy="0 0 0"/>
+    <origin xyz="0.35 0 -0.12" rpy="0 0 0"/>
   </joint>
   <joint name="caster_wheel_back_joint" type="fixed">
     <parent link="chassis_link"/>
     <child link="caster_wheel_back"/>
-    <origin xyz="0.35 0 -0.12" rpy="0 0 0"/>
+    <origin xyz="-0.35 0 -0.12" rpy="0 0 0"/>
+  </joint>
+
+    <!--................................ LIDAR .............................. -->
+
+  <link name="two_d_lidar">
+    <visual>
+      <geometry>
+        <cylinder radius="0.07" length="0.05"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.07" length="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.5"/>
+        <xacro:cylinder_inertia m="0.5" r="0.07" h="0.05"/>
+    </inertial>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="two_d_lidar"/>
+    <origin xyz="0.1 0 0.12" rpy="0 0 0"/>
   </joint>
 </robot>

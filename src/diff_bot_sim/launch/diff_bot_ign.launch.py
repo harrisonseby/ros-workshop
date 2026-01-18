@@ -72,10 +72,13 @@ def generate_launch_description():
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
-            "/world/empty/model/diff_bot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model"
+            "/world/empty/model/diff_bot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model",
+            "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist"
+
         ],
         remappings=[
             ('/world/empty/model/diff_bot/joint_state', 'diff_bot/joint_states'),
+            ('/cmd_vel', 'diff_bot/cmd_vel'),
         ]
     )
 

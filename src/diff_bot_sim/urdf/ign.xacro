@@ -8,10 +8,20 @@
             <render_engine>ogre2</render_engine>
         </plugin>
 
-        <!-- <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
-        </plugin> -->
-
         <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin
+            filename="libignition-gazebo-diff-drive-system.so"
+            name="ignition::gazebo::systems::DiffDrive">
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+            <wheel_separation>0.7</wheel_separation>
+            <wheel_radius>0.1</wheel_radius>
+            <odom_publish_frequency>1</odom_publish_frequency>
+            <topic>cmd_vel</topic>
         </plugin>
     </gazebo>
 

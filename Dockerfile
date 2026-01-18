@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
     ros-$ROS_DISTRO-rviz2 \
     ros-$ROS_DISTRO-ros-gz \
     ros-$ROS_DISTRO-ros-gz-bridge \
-    ros-$ROS_DISTRO-teleop-twist-joy \
+    ros-$ROS_DISTRO-turtlesim \
     ros-$ROS_DISTRO-joint-state-publisher \
     ros-$ROS_DISTRO-joint-state-publisher-gui \
     && rm -rf /var/lib/apt/lists/*

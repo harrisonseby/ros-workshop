@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="aws_robomaker_residential_FitnessEquipment_01">
+    <link name="link">
+      <inertial>
+        <mass>80</mass>
+	<inertia>
+	    <ixx>  1.5231681051e-01 </ixx>
+	    <ixy> -1.0236824255e-02 </ixy>
+	    <ixz>  4.5347695138e-04 </ixz>
+	    <iyy>  2.2216050074e-01 </iyy>
+	    <iyz>  5.9325087530e-05 </iyz>
+	    <izz>  1.4138500592e-01 </izz>
+	  </inertia>
+	</inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_FitnessEquipment_01/meshes/aws_FitnessEquipment_01_collision.DAE</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+	    <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_FitnessEquipment_01/meshes/aws_FitnessEquipment_01_visual.DAE</uri>
+          </mesh>
+        </geometry>
+      <meta> <layer> 1 </layer></meta>
+</visual>
+    </link>
+  <static>1</static>
+  </model>
+</sdf>

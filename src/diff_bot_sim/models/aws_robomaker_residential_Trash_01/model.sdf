@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="aws_robomaker_residential_Trash_01">
+    <link name="link">
+
+      <inertial>
+    
+        <mass>0.1</mass>
+	<inertia>
+	    <ixx>  1.5821894956e-02 </ixx>
+	    <ixy>  2.0426856750e-08 </ixy>
+	    <ixz>  1.3636295800e-08 </ixz>
+	    <iyy>  9.9157550863e-03 </iyy>
+	    <iyz> -3.5079934293e-08 </iyz>
+	    <izz>  1.5821917092e-02 </izz>
+	  </inertia>
+	</inertial>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_Trash_01/meshes/aws_Trash_01_collision.DAE</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+
+        <!-- <pose frame=''>0.0 0 -0.3 0 -0 0</pose> -->
+      </collision>
+
+      <visual name="visual">
+	    <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_Trash_01/meshes/aws_Trash_01_visual.DAE</uri>
+          </mesh>
+        </geometry>
+      <meta> <layer> 1 </layer></meta>
+</visual>
+    </link>
+    <!-- <pose frame=''>0.0 0 -0.3 0 -0 0</pose> -->
+  </model>
+</sdf>

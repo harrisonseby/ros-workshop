@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="aws_robomaker_residential_Rangehood_01">
+    <link name="link">
+      <inertial>
+        <mass>1</mass>
+	<inertia>
+	    <ixx>  1.9174859019e-01 </ixx>
+	    <ixy> -1.6433982015e-02 </ixy>
+	    <ixz>  1.7289632607e-04 </ixz>
+	    <iyy>  8.9748888724e-02 </iyy>
+	    <iyz>  8.3915247462e-04 </iyz>
+	    <izz>  1.4279140660e-01 </izz>
+	  </inertia>
+	</inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_Rangehood_01/meshes/aws_Rangehood_01_collision.DAE</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+	    <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_Rangehood_01/meshes/aws_Rangehood_01_visual.DAE</uri>
+          </mesh>
+        </geometry>
+      <meta> <layer> 2 </layer></meta>
+</visual>
+    </link>
+	<static>1</static>
+  </model>
+</sdf>

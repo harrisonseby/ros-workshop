@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     ros-$ROS_DISTRO-turtlesim \
     ros-$ROS_DISTRO-joint-state-publisher \
     ros-$ROS_DISTRO-joint-state-publisher-gui \
+    ros-${ROS_DISTRO}-slam-toolbox \
     && rm -rf /var/lib/apt/lists/*
 # Initialize rosdep
 RUN rosdep update

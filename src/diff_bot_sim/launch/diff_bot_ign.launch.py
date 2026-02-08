@@ -4,7 +4,7 @@ from os.path import join
 from xacro import parse, process_doc
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, AppendEnvironmentVariable
 from launch.substitutions import LaunchConfiguration, Command, PythonExpression
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
@@ -19,6 +19,7 @@ def get_xacro_to_doc(xacro_file_path, mappings):
 def generate_launch_description():
    
     diff_bot_path = get_package_share_directory("diff_bot_sim")
+
 
     robot_state_publisher = Node(
         package="robot_state_publisher",
@@ -45,7 +46,7 @@ def generate_launch_description():
 
     # Define Gazebo simulation launch
     gz_sim_share = get_package_share_directory("ros_gz_sim")
-    world_file = join(diff_bot_path, "worlds", "empty.sdf")
+    world_file = join(diff_bot_path, "worlds", "small_house.world")
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(join(gz_sim_share, "launch", "gz_sim.launch.py")),
         launch_arguments={
@@ -62,8 +63,8 @@ def generate_launch_description():
             "-name", "diff_bot",
             "-allow_renaming", "true",
             "-z", "0.28",
-            "-x", "0.0",
-            "-y", "0.0",
+            "-x", "-1.5",
+            "-y", "-1.0",
             "-Y", "0.0"
         ]
     )
@@ -72,19 +73,31 @@ def generate_launch_description():
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
-            "/world/empty/model/diff_bot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model",
+            "/world/default/model/diff_bot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model",
             "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
             "/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan"
 
         ],
         remappings=[
-            ('/world/empty/model/diff_bot/joint_state', 'diff_bot/joint_states'),
+            ('/world/default/model/diff_bot/joint_state', 'diff_bot/joint_states'),
             ('/cmd_vel', 'diff_bot/cmd_vel'),
             ('/scan', 'diff_bot/scan'),
         ]
     )
 
     return LaunchDescription([
+        AppendEnvironmentVariable(
+        name='IGN_GAZEBO_RESOURCE_PATH',
+        value=join(diff_bot_path, "worlds")),
+
+        AppendEnvironmentVariable(
+        name='IGN_GAZEBO_RESOURCE_PATH',
+        value=join(diff_bot_path, "models")),
+
+        AppendEnvironmentVariable(
+        name='IGN_GAZEBO_RESOURCE_PATH',
+        value=diff_bot_path),
+        
         robot_state_publisher,
         rviz,
         gz_sim,

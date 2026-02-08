@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="aws_robomaker_residential_RoomCeiling_01">
+    <link name="link">
+      <inertial>
+        <mass>1</mass>
+	<inertia>
+	    <ixx>  9.5783113230e+00 </ixx>
+	    <ixy>  4.9604356000e-02 </ixy>
+	    <ixz>  7.9239729164e-01 </ixz>
+	    <iyy>  3.5966332726e+01 </iyy>
+	    <iyz> -1.3927331791e-01 </iyz>
+	    <izz>  2.6436628209e+01 </izz>
+	  </inertia>
+	</inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_RoomCeiling_01/meshes/aws_RoomCeiling_01_collision.DAE</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+	    <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_RoomCeiling_01/meshes/aws_RoomCeiling_01_visual.DAE</uri>
+          </mesh>
+        </geometry>
+
+	<meta> 
+	    <layer> 3 </layer>
+	</meta>
+      </visual>
+    </link>
+    <static>1</static>
+
+  </model>
+</sdf>

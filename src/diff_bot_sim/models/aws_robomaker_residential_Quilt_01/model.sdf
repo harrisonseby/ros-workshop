@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="aws_robomaker_residential_Quilt_01">
+    <link name="link">
+      <inertial>
+        <mass>1</mass>
+	<inertia>
+	    <ixx>  2.2266060827e-01 </ixx>
+	    <ixy>  1.3545074124e-03 </ixy>
+	    <ixz>  8.2763119255e-04 </ixz>
+	    <iyy>  5.4734414795e-01 </iyy>
+	    <iyz> -1.0651753425e-03 </iyz>
+	    <izz>  3.4683469408e-01 </izz>
+	  </inertia>
+	</inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_Quilt_01/meshes/aws_Quilt_01_collision.DAE</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+	    <geometry>
+          <mesh>
+            <uri>file://models/aws_robomaker_residential_Quilt_01/meshes/aws_Quilt_01_visual.DAE</uri>
+          </mesh>
+        </geometry>
+      <meta> <layer> 1 </layer></meta>
+</visual>
+    </link>
+  </model>
+</sdf>

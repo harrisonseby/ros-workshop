@@ -9,9 +9,23 @@
 4. Finally I added a rviz node to have it start from a certain saved panel state.
 
 ### Inertial value addition
+1. Inertial values are added to the robot
 
 ### Sensor addition without gazebo
-
+1. Odom sensor and lidar are the only two gazebo sensors added 
 ## Bring up in gazebo
+1. Bring up in gazebo requires "gz_sim.launch.py" with a world file. 
+2. It also requires "create" executabel in "ros_gz_sim" package to spawn in gazebo
+3. "gz_ros_bridge" is required to convert the ign topics in ros2 topics
+4. AppendEnvironmentVariable is required to ensure available of models and world files in ro2 environment
+
+## Mapping setup
+1. Mapper params file is added in config folder and can be configured easily
+2. Mapping is run using "online_async_launch.py" launch file
+3. For mapping to work, we need a transform from map to odom
 
 ## Navigation setup
+1. Run "bringup_launch.py" launch file. Add the nav2_params as one parameter. 
+2. It is important to add some value to the map file. Otherwise it will fail to run. Even if there isnt an actual file, dont leave this parameter blank
+3. We might need to write a remapper script that would convert the cmd_vel topic to our bot topic. If you havent changed your vel topic name, then this is not required. 
+

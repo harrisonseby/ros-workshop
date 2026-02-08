@@ -29,3 +29,5 @@
 2. It is important to add some value to the map file. Otherwise it will fail to run. Even if there isnt an actual file, dont leave this parameter blank
 3. We might need to write a remapper script that would convert the cmd_vel topic to our bot topic. If you havent changed your vel topic name, then this is not required. 
 
+
+pandoc Nav2_Workshop_Presentation.md -o Nav2_Workshop.pptx -t pptx

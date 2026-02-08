@@ -75,13 +75,16 @@ def generate_launch_description():
         arguments=[
             "/world/default/model/diff_bot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model",
             "/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
-            "/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan"
-
+            "/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan",
+            "/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry",
+            "/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V",
+            "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
         ],
         remappings=[
             ('/world/default/model/diff_bot/joint_state', 'diff_bot/joint_states'),
             ('/cmd_vel', 'diff_bot/cmd_vel'),
             ('/scan', 'diff_bot/scan'),
+            ('/odom', 'diff_bot/odom'),
         ]
     )
 
